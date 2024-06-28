@@ -1,0 +1,48 @@
+local dropheight = 10
+
+game.ReplicatedStorage.dropdabulding.OnServerEvent:Connect(function(pl, g)
+	local building = game.ReplicatedStorage.bulddong:Clone()
+	building.dawg.BrickColor = BrickColor.random()
+	local allparts = building:GetChildren()
+	building.Parent = workspace.nonstacked
+	for i, v in pairs(allparts) do
+		if v:IsA('BasePart') then
+			v.Position += Vector3.new(g, dropheight, 0)
+			v.AssemblyLinearVelocity = Vector3.new(0, 2, 0)
+		end
+	end
+	
+	local anchpr = coroutine.wrap(function()
+		wait(0.3)
+		while wait(0.1) do
+			if building:FindFirstChildWhichIsA('BasePart') and building:FindFirstChildWhichIsA('BasePart').Anchored == false then
+				if building:FindFirstChildWhichIsA('BasePart').AssemblyLinearVelocity.Y == 0 then
+					for i, v in pairs(allparts) do
+						if v:IsA('BasePart') then
+							workspace.roc:Play()
+							v.Anchored = true
+						end
+					end
+					building.Parent = workspace.stacked
+				end
+			end
+		end
+	end)
+	building:FindFirstChildWhichIsA('BasePart').Touched:Connect(function(p)
+		for i, v in pairs(allparts) do
+			if v:IsA('BasePart') then
+				v.AssemblyLinearVelocity /= 6
+			end
+		end
+		print(p.Name)
+		if p.Name == 'delarea' then
+			dropheight = 10
+			for i, v in pairs(workspace.stacked:GetChildren()) do
+				v:Destroy()
+				print('deleted')
+			end
+		end
+	end)
+	anchpr()
+	dropheight += 4
+end)
