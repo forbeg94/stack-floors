@@ -1,0 +1,17 @@
+local dta = game:GetService('DataStoreService')
+local best = dta:GetDataStore('Best')
+
+game.ReplicatedStorage.setbest.OnServerEvent:Connect(function()
+	workspace.best.Value += 1
+end)
+game.Players.PlayerAdded:Connect(function(pl)
+	if best:GetAsync(pl.UserId) == nil then
+		best:SetAsync(pl.UserId, 0)
+	else
+		workspace.best.Value = best:GetAsync(pl.UserId)
+	end
+end)
+
+game.Players.PlayerRemoving:Connect(function(p)
+	best:SetAsync(p.UserId, workspace.best.Value)
+end)	
