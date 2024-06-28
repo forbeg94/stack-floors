@@ -1,0 +1,14 @@
+local best = 0
+while wait(0.01) do
+	local num = 0
+	for i, v in pairs(workspace.stacked:GetChildren()) do
+		num += 1
+	end
+	if best < num then
+		best = num
+		if workspace.best.Value < best then
+			game.ReplicatedStorage.setbest:FireServer()
+		end
+	end
+	script.Parent.Text = 'floors: '.. num.. ' your best: '.. workspace.best.Value
+end
