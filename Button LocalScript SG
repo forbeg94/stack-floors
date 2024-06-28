@@ -1,0 +1,15 @@
+local can = true
+local lolservce = game:GetService('TweenService')
+
+script.Parent.MouseButton1Click:Connect(function()
+	if can == true then
+		workspace["bass.wav"]:Play()
+		local pos = script.Parent.tjngy.Position.X.Scale + 0.472 - (script.Parent.tjngy.Position.X.Scale * 2)
+		can = false
+		game.ReplicatedStorage.dropdabulding:FireServer(pos)
+		local move = lolservce:Create(workspace.CurrentCamera, TweenInfo.new(1), {CFrame = game.Workspace.CurrentCamera.CFrame + Vector3.new(0, 4, 0)})
+		move:Play()
+		wait(1.2)
+		can = true
+	end
+end)
