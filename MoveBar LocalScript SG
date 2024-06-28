@@ -1,1 +1,11 @@
+local g = game:GetService('TweenService')
 
+while true do
+	local tjere = g:Create(script.Parent, TweenInfo.new(math.random(900, 1500) / 1000, Enum.EasingStyle.Linear), {Position = UDim2.new(-6.21, 0, 1.413, 0)})
+	tjere:Play()
+	tjere.Completed:Wait()
+
+	local bac = g:Create(script.Parent, TweenInfo.new(math.random(900, 1500) / 1000, Enum.EasingStyle.Linear), {Position = UDim2.new(7.143, 0, 1.413, 0)})
+	bac:Play()
+	bac.Completed:Wait()
+end
