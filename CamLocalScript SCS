@@ -1,0 +1,11 @@
+local g = game:GetService('TweenService')
+workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
+game.Workspace.CurrentCamera.FieldOfView = 30
+game.Players.LocalPlayer.Character:WaitForChild('HumanoidRootPart').Anchored = true
+game.Workspace.CurrentCamera.CFrame = workspace:WaitForChild('campos').CFrame
+workspace.nonstacked.ChildAdded:Connect(function(p)
+	p.ChildRemoved:Connect(function()
+		local moveback = g:Create(workspace.CurrentCamera, TweenInfo.new(1), {CFrame = workspace:WaitForChild('campos').CFrame})
+		moveback:Play()
+	end)
+end)
